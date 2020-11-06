@@ -5,11 +5,10 @@ import torch
 
 from complex import ComplEx
 from dataset import ALL_DATASET_NAMES, Dataset
-from evaluation import Evaluator
 from model import DIMENSION, INIT_SCALE
 
 parser = argparse.ArgumentParser(
-    description="Kelpie"
+    description="Use a ComplEx model to get all tail scores for all facts from a file"
 )
 
 parser.add_argument('--dataset',

@@ -13,7 +13,7 @@ from model import OPTIMIZER_NAME, LEARNING_RATE, REGULARIZER_NAME, REGULARIZER_W
 from multiclass_nll_optimizer import MultiClassNLLOptimizer
 
 parser = argparse.ArgumentParser(
-    description="Relational learning contraption"
+    description="Train a ComplEx model"
 )
 
 parser.add_argument('--dataset',

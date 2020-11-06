@@ -7,7 +7,7 @@ from evaluation import Evaluator
 from model import DIMENSION, INIT_SCALE
 
 parser = argparse.ArgumentParser(
-    description="Kelpie"
+    description="Evaluate a ComplEx model"
 )
 
 parser.add_argument('--dataset',
