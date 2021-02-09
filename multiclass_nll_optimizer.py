@@ -72,9 +72,8 @@ class MultiClassNLLOptimizer(Optimizer):
         # batch size must be the minimum between the passed value and the number of Kelpie training facts
         batch_size = min(self.batch_size, len(training_samples))
 
-        cur_loss = 0
         for e in range(self.epochs):
-            cur_loss = self.epoch(batch_size, training_samples)
+            self.epoch(batch_size, training_samples)
 
             if evaluate_every > 0 and valid_samples is not None and \
                     (e + 1) % evaluate_every == 0:

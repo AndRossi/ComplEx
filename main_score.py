@@ -70,7 +70,7 @@ model.eval()
 
 facts_to_test = read_facts(args.facts_file)
 samples_to_test = numpy.array([dataset.fact_to_sample(x) for x in facts_to_test])
-all_scores = model.all_scores(samples_to_test).detach()
+all_scores = model.all_scores_relations(samples_to_test)
 
 with open("output.txt", "w") as outfile:
     dataset_entity_lines = [str(i)+"\t"+dataset.entity_id_2_name[i]+"\n" for i in range(dataset.num_entities)]
@@ -80,6 +80,6 @@ with open("output.txt", "w") as outfile:
     for i in range(len(samples_to_test)):
         cur_sample = samples_to_test[i]
         (h_id, r_id, t_id) = cur_sample
-        scores_lines.append(";".join([str(h_id), str(r_id), str(t_id)]) + "\t" + ";".join([str(x) for x in all_scores[i].cpu().numpy()]) + "\n")
+        scores_lines.append(";".join([str(h_id), str(r_id), str(t_id)]) + "\t" + ";".join([str(x) for x in all_scores[i]]) + "\n")
 
     outfile.writelines(dataset_entity_lines + ["###\n"] + dataset_relation_lines + ["###\n"] + scores_lines)

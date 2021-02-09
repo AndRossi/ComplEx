@@ -137,6 +137,26 @@ class ComplEx(Model):
         rhs = self._get_rhs()
         return q @ rhs  # 2d matrix: each row corresponds to a sample and has the scores for all entities
 
+    def all_scores_relations(self, samples: np.array) -> np.array:
+        """
+            For each of the passed samples, compute scores for all possible tail relations.
+            :param samples: a 2-dimensional numpy array containing the samples to score, one per row
+            :return: a 2-dimensional numpy array that, for each sample, contains a row for each passed sample
+                     and a column for each possible relation
+        """
+
+        output = []
+        all_relation_ids = np.array(range(self.num_relations))
+        for sample in samples:
+            samples_to_predict = np.tile(sample, (self.num_relations, 1))
+            samples_to_predict[:, 1] = all_relation_ids
+            relation_scores = self.score(samples_to_predict)
+            output.append(relation_scores)
+
+        return np.array(output)
+
+
+
     def forward(self, samples: np.array):
         """
             Perform forward propagation on the passed samples
